@@ -25,7 +25,7 @@ namespace Webscraper
         public MainWindow()
         {
             InitializeComponent();
-            AutoUpdater.Start("https://gist.githubusercontent.com/platinaCoder/dc02a911ddedb39a7ef3d64f4ee4c12b/raw/04a4dd135176357ac06a6e364758d6ac741bd96d/webscraper_update.xml");
+            AutoUpdater.Start("https://gist.githubusercontent.com/platinaCoder/cdbb7cdd1e46c6984e9024e868b79dfd/raw/bf21ddd0a22f197240e8facb8eef03806264bb50/update.xml");
         }
         private void ItemExport_Click(object sender, RoutedEventArgs e)
         {
