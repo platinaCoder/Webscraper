@@ -73,7 +73,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock MaxWidth="385" Text="{Binding Title}" TextWrapping="Wrap" FontWeight="Bold"/>
+                            <TextBlock MaxWidth="385" Text="{Binding Title}" TextWrapping="Wrap"/>
                             <TextBlock MaxWidth="385" TextWrapping="Wrap">
                                 <Span xml:space="preserve"><Hyperlink NavigateUri="{Binding Link}" RequestNavigate="Hyperlink_RequestNavigate">Open product pagina</Hyperlink></Span>
                             </TextBlock>
