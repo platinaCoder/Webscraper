@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AutoUpdaterDotNET;
 
 namespace Webscraper
 {
@@ -24,6 +25,7 @@ namespace Webscraper
         public MainWindow()
         {
             InitializeComponent();
+            AutoUpdater.Start("https://gist.githubusercontent.com/platinaCoder/dc02a911ddedb39a7ef3d64f4ee4c12b/raw/3f7becdcc16e808333d3be41a7c663fcf2a646a3/webscraper_update.xml");
         }
         private void ItemExport_Click(object sender, RoutedEventArgs e)
         {
