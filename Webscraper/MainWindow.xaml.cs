@@ -41,23 +41,23 @@ namespace Webscraper
         }
         private void Zoeken_btn_Click(object sender, RoutedEventArgs e)
         {
-            business_logic.ClearItems();
+            SearchPrehm.ClearItems();
             string SearchQuery = ArtikelNummer_Text.Text;
             if (string.IsNullOrEmpty(SearchQuery))
             {
-                business_logic.WarningDialogNoQuery();
+                ErrorDialogs.WarningDialogNoQuery();
             }
             else
             {
                 if (PrehmBox.IsChecked ?? false)
                 {
 
-                    business_logic.SearchPrehm(SearchQuery);
-                    DataCollection.ItemsSource = business_logic.LoadCollectionData;
+                    SearchPrehm.searchPrehm(SearchQuery);
+                    DataCollection.ItemsSource = SearchPrehm.LoadCollectionData;
                 }
                 else
                 {
-                    business_logic.WarningDialogNoWeb();
+                    ErrorDialogs.WarningDialogNoWeb();
                 }
             }
         }
