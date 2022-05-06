@@ -29,22 +29,39 @@ namespace Webscraper
 
             try
             {
-                HtmlDocument doc = web.Load("https://www.prehmshop.de/advanced_search_result.php?keywords=" + SearchQuery);
-                var title = doc.DocumentNode.CssSelect("div.header_cell > a").Single().InnerText;
+                string ZoekOpdracht = SearchQuery.Replace(" ", "+");
+                HtmlDocument doc = web.Load("https://www.prehmshop.de/advanced_search_result.php?keywords=" + ZoekOpdracht);
+                var title = doc.DocumentNode.CssSelect("div.header_cell > a").ToList();
                 var links = doc.DocumentNode.CssSelect("a.product_link");
                 var productLink = new List<string>();
                 var productTitle = new List<string>();
 
-                foreach (var link in links)
+                foreach (var item in title)
                 {
-                    if (link.Attributes["href"].Value.Contains(".html"))
+                    if (item.Attributes["href"].Value.Contains(".html"))
                     {
-                        productLink.Add(link.Attributes["href"].Value);
+                        productLink.Add(item.Attributes["href"].Value);
+                        productTitle.Add(item.InnerText);
                     }
                 }
 
-                Debug.Print($"Title: {title} \n Link: {productLink[0]}");
-                _entries.Add(new EntryModel { Title = title, Link = productLink[0] });
+                var TitleAndLink = productLink.Zip(productTitle, (l, t) => new { productLink = l, productTitle = t });
+                foreach (var nw in TitleAndLink)
+                {
+                    var product = new List<EntryModel>();
+                    var adDetails = new EntryModel
+                    {
+                        Title = nw.productTitle,
+                        Link = nw.productLink
+                    };
+
+                    Debug.Print(adDetails.ToString());
+                    var ZoekOpdrachtInTitle = adDetails.Title.ToLower().Contains(ZoekOpdracht.ToLower());
+                    if (ZoekOpdrachtInTitle)
+                    {
+                        _entries.Add(adDetails);
+                    }
+                }
             }
             catch (WebException)
             {
