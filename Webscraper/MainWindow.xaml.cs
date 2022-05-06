@@ -52,13 +52,20 @@ namespace Webscraper
                 if (PrehmBox.IsChecked ?? false)
                 {
 
-                    SearchPrehm.searchPrehm(SearchQuery);
+                    SearchPrehm.PrehmSearchResults(SearchQuery);
                     DataCollection.ItemsSource = SearchPrehm.LoadCollectionData;
                 }
                 else
                 {
                     ErrorDialogs.WarningDialogNoWeb();
                 }
+            }
+        }
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Zoeken_btn_Click((object)sender, e);
             }
         }
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

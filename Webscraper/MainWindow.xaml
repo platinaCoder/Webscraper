@@ -43,6 +43,7 @@
             <DockPanel>
                 <TextBox x:Name="ArtikelNummer_Text"
                          DockPanel.Dock="Right"
+                         KeyDown="OnKeyDownHandler"
                          Height="20" Width="120"
                          Margin="-480,0,0,0"/>
                 <Label Content="Artikel Nummer : "

@@ -23,16 +23,17 @@ namespace Webscraper
             get { return _entries; }
             set { _entries = value; }
         }
-        public static void searchPrehm(string SearchQuery)
+        public static void PrehmSearchResults(string SearchQuery)
         {
             HtmlWeb web = new HtmlWeb();
 
             try
             {
                 HtmlDocument doc = web.Load("https://www.prehmshop.de/advanced_search_result.php?keywords=" + SearchQuery);
-                string title = doc.DocumentNode.CssSelect("div.header_cell > a").Single().InnerText;
+                var title = doc.DocumentNode.CssSelect("div.header_cell > a").Single().InnerText;
                 var links = doc.DocumentNode.CssSelect("a.product_link");
                 var productLink = new List<string>();
+                var productTitle = new List<string>();
 
                 foreach (var link in links)
                 {
@@ -42,13 +43,8 @@ namespace Webscraper
                     }
                 }
 
-                string filteredProductLink = productLink[0];
-                int index = filteredProductLink.IndexOf("&");
-                if (index >= 0)
-                    filteredProductLink = filteredProductLink.Substring(0, index);
-
-                Debug.Print($"Title: {title} \n Link: {filteredProductLink}");
-                _entries.Add(new EntryModel { Title = title, Link = filteredProductLink });
+                Debug.Print($"Title: {title} \n Link: {productLink[0]}");
+                _entries.Add(new EntryModel { Title = title, Link = productLink[0] });
             }
             catch (WebException)
             {
