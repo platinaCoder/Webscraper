@@ -70,12 +70,29 @@
             </DockPanel>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
-            <ListBox x:Name="DataCollection" ItemsSource="{Binding LoadCollectionData}" MaxHeight="406" Margin="0,0,10,10">
+            <ListBox BorderThickness="1.5" Background="#FFF6FBFF" x:Name="DataCollection" ItemsSource="{Binding LoadCollectionData}" MaxHeight="406" Margin="0,0,10,10" AlternationCount="2">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#FFF6FBFF"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock MaxWidth="385" Text="{Binding Title}" TextWrapping="Wrap"/>
-                            <TextBlock MaxWidth="385" TextWrapping="Wrap">
+                            <TextBlock Margin="0,2,0,0" MaxWidth="385" Text="{Binding Title}" TextWrapping="Wrap"/>
+                            <TextBlock Margin="0,0,0,4" MaxWidth="385" TextWrapping="Wrap">
                                 <Span xml:space="preserve"><Hyperlink NavigateUri="{Binding Link}" RequestNavigate="Hyperlink_RequestNavigate">Open product pagina</Hyperlink></Span>
                             </TextBlock>
                         </StackPanel>
