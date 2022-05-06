@@ -56,11 +56,7 @@ namespace Webscraper
                     };
 
                     Debug.Print(adDetails.ToString());
-                    var ZoekOpdrachtInTitle = adDetails.Title.ToLower().Contains(ZoekOpdracht.ToLower());
-                    if (ZoekOpdrachtInTitle)
-                    {
-                        _entries.Add(adDetails);
-                    }
+                    _entries.Add(adDetails);
                 }
             }
             catch (WebException)
